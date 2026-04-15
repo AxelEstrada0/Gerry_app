@@ -1,0 +1,38 @@
+GERRY PROJECT STATE SNAPSHOT
+
+PROJECT: Addict Gym App (Flutter + Firebase) STAGE: Published test build
+(AAB uploaded to Google Play Console, identity verification pending)
+
+TECH STACK: - Flutter - Firebase Auth - Firestore - Google Play
+Console - AppBundle (.aab) signed & uploaded
+
+ARCHITECTURE: - AuthGate for session routing - Modular structure: /pages
+/services /models /core /widgets
+
+CORE FEATURES IMPLEMENTED: - Firebase Authentication
+(login/register/logout) - Firestore user profiles - AppUser model -
+UserService (create/get/update user) - Dashboard system (replaced old
+home_page logic) - Routing system (AppRoutes) - Signed production
+build - Google Play Console internal testing upload
+
+CONCEPTUAL LEVEL: User has moved from “app building” to “system
+architecture thinking”: - Database systems - Reporting systems (Excel
+generation) - Communication systems (email automation) - Infrastructure
+design - Cloud + local server hybrid ideas (ESP32 / Raspberry)
+
+USER KNOWLEDGE LEVEL: - Understands auth flow - Understands database
+logic - Understands cloud architecture conceptually - Understands system
+modularization - Understands deployment pipeline - Thinks in backend
+structures (POST/GET logic)
+
+FUTURE ROADMAP: 1) Database logic expansion 2) Data analytics 3) Excel
+report generation 4) File export systems 5) Email automation 6) API
+creation 7) Server infrastructure 8) Hybrid cloud/local systems 9)
+Automation pipelines 10) Full gym management system
+
+STATUS: App is live in Google Play Console (test phase). Verification
+pending (24h–7 days). System architecture foundation completed. Ready
+for Level 10 (infrastructure + automation stage).
+
+This file is a state snapshot to resume project continuity in future
+conversations.

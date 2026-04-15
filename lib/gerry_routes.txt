@@ -1,0 +1,695 @@
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: HomePage1(),
+    );
+  }
+}
+
+class HomePage1 extends StatefulWidget {
+  const HomePage1({super.key});
+
+  @override
+  State<HomePage1> createState() => _HomePage1State();
+}
+
+class _HomePage1State extends State<HomePage1> {
+  int contador = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      appBar: AppBar(
+        title: const Text('Gerry & Niki App - Nivel 8'),
+      ),
+
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Contador: $contador',
+              style: const TextStyle(fontSize: 24),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  contador++;
+                });
+              },
+              child: const Text('Sumar'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  contador--;
+                });
+              },
+              child: const Text('Restar'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CloudPage(),
+                  ),
+                );
+              },
+              child: const Text('DataBase'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginPage(),
+                  ),
+                );
+              },
+              child: Text("Ir a Login"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ThirdPage(),
+                  ),
+                );
+              },
+              child: const Text('Ir a Pantalla 3'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CounterPage(),
+                  ),
+                );
+              },
+              child: const Text('Ir a Pantalla 4'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MemoryListPage(),
+                  ),
+                );
+              },
+              child: const Text('Ir a Pantalla 5'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  const SecondPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Pantalla 2'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Volver'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ThirdPage(),
+                  ),
+                );
+              },
+              child: const Text('Ir a Pantalla 3'),
+            ),
+
+          ],
+        )
+        
+      ),
+    );
+  }
+}
+
+class ThirdPage extends StatelessWidget {
+  const ThirdPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Tema 5 - Layout'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16), // 🔹 Padding general
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+
+            // 🔹 TÍTULO
+            const Text(
+              'Diseño que no da pena',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            // 🔹 DESCRIPCIÓN
+            const Text(
+              'Ejemplo visual de Column, Row, Padding, Expanded y Container.',
+              style: TextStyle(fontSize: 16),
+            ),
+
+            const SizedBox(height: 20),
+
+            // 🔹 CONTAINER DECORADO
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.blue.shade50,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Text(
+                'Esto es un Container con padding y bordes redondeados',
+                textAlign: TextAlign.center,
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            // 🔹 ROW CON BOTONES
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Botón A'),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Botón B'),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 20),
+
+            // 🔹 EXPANDED
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.green.shade100,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Expanded ocupa el espacio sobrante',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            // 🔹 BOTÓN ABAJO (Spacer implícito por Expanded)
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Volver'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CounterPage extends StatefulWidget {
+  const CounterPage({super.key});
+
+  @override
+  State<CounterPage> createState() => _CounterPageState();
+}
+
+class _CounterPageState extends State<CounterPage> {
+  int _contador = 0;
+
+  Future<void> _cargarContador() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _contador = prefs.getInt('contador') ?? 0;
+    });
+  }
+
+  Future<void> _guardarContador() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('contador', _contador);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _cargarContador();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Nivel 6 - Memoria'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Contador: $_contador',
+              style: const TextStyle(fontSize: 32),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _contador++;
+                });
+                _guardarContador();
+              },
+              child: const Text('Sumar'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Volver'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+}
+
+class MemoryListPage extends StatefulWidget {
+  const MemoryListPage({super.key});
+
+  @override
+  State<MemoryListPage> createState() => _MemoryListPageState();
+}
+
+class _MemoryListPageState extends State<MemoryListPage> {
+  final TextEditingController _controller = TextEditingController();
+  List<String> _items = [];
+
+  // ===== MEMORIA =====
+
+  Future<void> _cargarLista() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? data = prefs.getString('lista');
+
+    if (data != null) {
+      final List decoded = jsonDecode(data);
+      setState(() {
+        _items = decoded.cast<String>();
+      });
+    }
+  }
+
+  Future<void> _guardarLista() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String encoded = jsonEncode(_items);
+    await prefs.setString('lista', encoded);
+  }
+
+  // ===== CICLO DE VIDA =====
+
+  @override
+  void initState() {
+    super.initState();
+    _cargarLista();
+  }
+
+  // ===== UI =====
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Nivel 7 - Lista viva'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+
+            // INPUT
+            TextField(
+              controller: _controller,
+              decoration: const InputDecoration(
+                labelText: 'Nuevo item',
+                border: OutlineInputBorder(),
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            // BOTÓN AGREGAR
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_controller.text.trim().isEmpty) return;
+
+                  setState(() {
+                    _items.add(_controller.text.trim());
+                    _controller.clear();
+                  });
+
+                  _guardarLista();
+                },
+                child: const Text('Agregar'),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            // LISTA
+            Expanded(
+              child: _items.isEmpty
+                  ? const Center(child: Text('Lista vacía 🧠'))
+                  : ListView.builder(
+                      itemCount: _items.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          child: ListTile(
+                            title: Text(_items[index]),
+                            trailing: IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () {
+                                setState(() {
+                                  _items.removeAt(index);
+                                });
+                                _guardarLista();
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+            ),
+
+            // VOLVER
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                  // width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Volver'),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NumberListPage(),
+                      ),
+                    );
+                  },
+                  child: const Text('Int List'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class NumberListPage extends StatefulWidget {
+  const NumberListPage({super.key});
+
+  @override
+  State<NumberListPage> createState() => _NumberListPageState();
+}
+
+class _NumberListPageState extends State<NumberListPage> {
+
+  // ===== CONTROLADOR =====
+  final TextEditingController _numController = TextEditingController();
+
+  // ===== DATA =====
+  List<int> _numeros = [];
+
+  // ===== MEMORIA =====
+  Future<void> _cargarLista() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? data = prefs.getString('lista_numeros');
+
+    if (data != null) {
+      final List decoded = jsonDecode(data);
+      setState(() {
+        _numeros = decoded.cast<int>();
+      });
+    }
+  }
+
+  Future<void> _guardarLista() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String encoded = jsonEncode(_numeros);
+    await prefs.setString('lista_numeros', encoded);
+  }
+
+  // ===== CICLO DE VIDA =====
+  @override
+  void initState() {
+    super.initState();
+    _cargarLista();
+  }
+
+  // ===== UI =====
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Nivel 7 - Lista viva'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+
+            // INPUT
+            TextField(
+              controller: _numController,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                labelText: 'Agregar número',
+                border: OutlineInputBorder(),
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            // BOTÓN AGREGAR
+            ElevatedButton(
+              onPressed: () {
+                if (_numController.text.trim().isEmpty) return;
+
+                final int? valor = int.tryParse(_numController.text.trim());
+                if (valor == null) return;
+
+                setState(() {
+                  _numeros.add(valor);
+                });
+
+                _guardarLista();
+                _numController.clear();
+              },
+              child: const Text('Agregar número'),
+            ),
+
+            const SizedBox(height: 16),
+
+            // LISTA
+            Expanded(
+              child: ListView.builder(
+                itemCount: _numeros.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
+                      title: Text(
+                        _numeros[index].toString(),
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () {
+                          setState(() {
+                            _numeros.removeAt(index);
+                          });
+                          _guardarLista();
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            // VOLVER
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Volver'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CloudPage extends StatefulWidget {
+  const CloudPage({super.key});
+
+  @override
+  State<CloudPage> createState() => _CloudPageState();
+}
+
+class _CloudPageState extends State<CloudPage> {
+  final TextEditingController _controller = TextEditingController();
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+  // ===== GUARDAR EN LA NUBE =====
+
+  Future<void> _guardarTexto() async {
+
+    final texto = _controller.text.trim();
+    
+    if (texto.isEmpty) return;
+
+    await _db.collection('mensajes').add({
+      'texto': texto,
+      'timestamp': FieldValue.serverTimestamp(),
+    });
+
+    _controller.clear();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Nivel 8 - Cloud'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+
+            // INPUT
+            TextField(
+              controller: _controller,
+              decoration: const InputDecoration(
+                labelText: 'Mensaje a la nube',
+                border: OutlineInputBorder(),
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            // BOTÓN GUARDAR
+            ElevatedButton(
+              onPressed: _guardarTexto,
+              child: const Text('Guardar en la nube'),
+            ),
+
+            const SizedBox(height: 20),
+
+            // LISTA EN TIEMPO REAL
+            Expanded(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: _db
+                    .collection('mensajes')
+                    .orderBy('timestamp', descending: true)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                    return const Center(child: Text('Sin datos aún'));
+                  }
+
+                  final docs = snapshot.data!.docs;
+
+                  return ListView.builder(
+                    itemCount: docs.length,
+                    itemBuilder: (context, index) {
+                      final data = docs[index].data() as Map<String, dynamic>;
+                      return Card(
+                        child: ListTile(
+                          title: Text(data['texto'] ?? ''),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+
+            // VOLVER
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Volver'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
